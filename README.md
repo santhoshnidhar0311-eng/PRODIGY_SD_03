@@ -1,34 +1,33 @@
 Contact Management System
-📌 Project Overview
+Project Overview
 
-The Contact Management System is a simple Python-based application that allows users to store and manage contact information efficiently. Users can add, view, update, search, and delete contacts. The application stores contact details such as name, phone number, and email address, providing an easy way to organize personal or professional contacts.
+The Contact Management System is a Python-based application designed to help users store and manage contact information efficiently. The system allows users to add, view, search, update, and delete contacts. Contact details such as name, phone number, and email address are stored in a file to ensure persistent storage.
 
-✨ Features
-➕ Add a new contact
-📋 View all saved contacts
-🔍 Search contacts by name
-✏️ Edit existing contact details
-❌ Delete contacts
-💾 Store contacts in a file for persistent storage
-🖥️ User-friendly menu-driven interface
-🛠️ Technologies Used
+Features
+Add new contacts with name, phone number, and email address.
+View all saved contacts.
+Search for contacts by name.
+Update existing contact details.
+Delete contacts from the contact list.
+Store contact information in a file for future use.
+Technologies Used
 Python 3
-File Handling (JSON or Text File)
-Object-Oriented Programming (Optional)
-📂 Project Structure
+File Handling
+JSON/Text File Storage
+Project Structure
 Contact-Management-System/
 │
-├── main.py              # Main Python program
-├── contacts.json        # Stores contact information
-├── README.md            # Project documentation
-🚀 How to Run the Project
-1. Clone the Repository
+├── main.py
+├── contacts.json
+├── README.md
+How to Run the Project
+Clone the repository:
 git clone https://github.com/your-username/Contact-Management-System.git
-2. Navigate to the Project Directory
+Navigate to the project directory:
 cd Contact-Management-System
-3. Run the Application
+Run the Python program:
 python main.py
-📸 Functionalities
+Functionalities
 Add Contact
 
 Users can add a new contact by entering:
@@ -38,21 +37,21 @@ Phone Number
 Email Address
 View Contacts
 
-Displays all saved contacts in a structured format.
+Displays all stored contacts in a user-friendly format.
 
 Search Contact
 
-Allows users to search for a contact using the contact name.
+Allows users to search for contacts using their names.
 
 Update Contact
 
-Users can modify existing contact information.
+Enables users to modify the details of existing contacts.
 
 Delete Contact
 
-Removes unwanted contacts from the system.
+Allows users to remove unwanted contacts from the system.
 
-📷 Sample Output
+Sample Output
 ===== Contact Management System =====
 
 1. Add Contact
@@ -69,18 +68,17 @@ Enter Phone Number: 9876543210
 Enter Email: john@example.com
 
 Contact added successfully!
-🎯 Future Enhancements
-Add a graphical user interface (GUI)
-Integrate with a database (MySQL/SQLite)
-Export contacts to CSV/Excel
-Add user authentication
-Implement contact categories and favorites
-👨‍💻 Author
+Future Enhancements
+Develop a graphical user interface (GUI).
+Integrate a database such as MySQL or SQLite.
+Add import and export functionality for contacts.
+Implement user authentication and security features.
+Author
 
 S. Santhosh
 B.Tech Artificial Intelligence and Machine Learning
 SRM Institute of Science and Technology, Tiruchirappalli
 
-📄 License
+License
 
 This project is developed for educational and learning purposes.
