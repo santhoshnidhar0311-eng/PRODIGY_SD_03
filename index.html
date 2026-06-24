@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ContactSphere - Premium Contact Management System</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Google Material Symbols Rounded -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient background blobs -->
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+  <div class="bg-blob blob-3"></div>
+
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">
+          <span class="material-symbols-rounded">contacts_product</span>
+        </div>
+        <div class="logo-text">
+          <h1>ContactSphere</h1>
+          <p>Prodigy InfoTech - Task 03</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="active" data-filter="all">
+            <span class="material-symbols-rounded">grid_view</span>
+            <span>All Contacts</span>
+            <span class="badge" id="count-all">0</span>
+          </li>
+          <li data-filter="favorite">
+            <span class="material-symbols-rounded text-favorite">star</span>
+            <span>Favorites</span>
+            <span class="badge" id="count-favorite">0</span>
+          </li>
+          <li class="nav-divider">Categories</li>
+          <li data-filter="Personal">
+            <span class="material-symbols-rounded text-personal">person</span>
+            <span>Personal</span>
+            <span class="badge" id="count-personal">0</span>
+          </li>
+          <li data-filter="Work">
+            <span class="material-symbols-rounded text-work">work</span>
+            <span>Work</span>
+            <span class="badge" id="count-work">0</span>
+          </li>
+          <li data-filter="Family">
+            <span class="material-symbols-rounded text-family">diversity_3</span>
+            <span>Family</span>
+            <span class="badge" id="count-family">0</span>
+          </li>
+          <li data-filter="Other">
+            <span class="material-symbols-rounded text-other">label</span>
+            <span>Other</span>
+            <span class="badge" id="count-other">0</span>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-actions">
+        <button class="btn btn-primary" id="btn-add-contact-nav">
+          <span class="material-symbols-rounded">add_circle</span>
+          <span>Add Contact</span>
+        </button>
+        <div class="backup-actions">
+          <button class="btn btn-outline btn-sm" id="btn-export" title="Export Backup (JSON)">
+            <span class="material-symbols-rounded">download</span>
+            <span>Export</span>
+          </button>
+          <button class="btn btn-outline btn-sm" id="btn-import-trigger" title="Import Backup (JSON)">
+            <span class="material-symbols-rounded">upload</span>
+            <span>Import</span>
+          </button>
+          <input type="file" id="import-file" accept=".json" style="display: none;">
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Bar -->
+      <header class="top-bar">
+        <div class="search-container">
+          <span class="material-symbols-rounded search-icon">search</span>
+          <input type="text" id="search-input" placeholder="Search contacts by name, email, or phone...">
+          <button class="clear-search" id="clear-search" style="display: none;">
+            <span class="material-symbols-rounded">close</span>
+          </button>
+        </div>
+        <div class="top-bar-right">
+          <div class="date-display" id="date-display">June 24, 2026</div>
+          <div class="profile-summary">
+            <div class="profile-avatar">PI</div>
+            <div class="profile-details">
+              <span class="profile-name">Intern User</span>
+              <span class="profile-role">Prodigy InfoTech</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard Stats -->
+      <section class="dashboard-stats">
+        <div class="stat-card">
+          <div class="stat-icon-wrapper purple">
+            <span class="material-symbols-rounded">group</span>
+          </div>
+          <div class="stat-info">
+            <h3 id="stat-total-contacts">0</h3>
+            <p>Total Contacts</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrapper blue">
+            <span class="material-symbols-rounded">star</span>
+          </div>
+          <div class="stat-info">
+            <h3 id="stat-favorites">0</h3>
+            <p>Favorites Saved</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrapper teal">
+            <span class="material-symbols-rounded">bolt</span>
+          </div>
+          <div class="stat-info">
+            <h3 id="stat-recent">0</h3>
+            <p>Recently Added</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact List Control Header -->
+      <section class="content-header">
+        <div class="header-left">
+          <h2 id="view-title">All Contacts</h2>
+          <span class="results-count" id="results-count">0 contacts</span>
+        </div>
+        <div class="header-right">
+          <!-- Sort dropdown -->
+          <div class="sort-wrapper">
+            <span class="material-symbols-rounded select-icon">sort</span>
+            <select id="sort-select">
+              <option value="name-asc">Name: A to Z</option>
+              <option value="name-desc">Name: Z to A</option>
+              <option value="date-newest">Date: Newest First</option>
+              <option value="date-oldest">Date: Oldest First</option>
+            </select>
+          </div>
+          <!-- View toggler -->
+          <div class="view-toggle">
+            <button class="toggle-btn active" id="view-grid" title="Grid View">
+              <span class="material-symbols-rounded">grid_on</span>
+            </button>
+            <button class="toggle-btn" id="view-list" title="List View">
+              <span class="material-symbols-rounded">format_list_bulleted</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contacts Container -->
+      <section class="contacts-container grid-view" id="contacts-container">
+        <!-- Dynamic contact cards will be loaded here -->
+      </section>
+
+      <!-- Empty State -->
+      <div class="empty-state" id="empty-state" style="display: none;">
+        <div class="empty-icon-wrapper">
+          <span class="material-symbols-rounded">contact_page</span>
+        </div>
+        <h3>No Contacts Yet</h3>
+        <p>Start organizing your network by adding your first contact.</p>
+        <button class="btn btn-primary" id="btn-add-contact-empty">
+          <span class="material-symbols-rounded">add</span>
+          <span>Add First Contact</span>
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add/Edit Contact Modal -->
+  <div class="modal-overlay" id="contact-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="modal-title">Add New Contact</h2>
+        <button class="close-btn" id="btn-close-modal">
+          <span class="material-symbols-rounded">close</span>
+        </button>
+      </div>
+      <form id="contact-form" autocomplete="off">
+        <input type="hidden" id="contact-id">
+        
+        <div class="form-group">
+          <label for="contact-name">
+            <span class="material-symbols-rounded">person</span> Full Name *
+          </label>
+          <input type="text" id="contact-name" placeholder="John Doe" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="contact-phone">
+              <span class="material-symbols-rounded">call</span> Phone Number *
+            </label>
+            <input type="tel" id="contact-phone" placeholder="+1 (555) 000-0000" required>
+          </div>
+          <div class="form-group">
+            <label for="contact-email">
+              <span class="material-symbols-rounded">mail</span> Email Address *
+            </label>
+            <input type="email" id="contact-email" placeholder="john@example.com" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="contact-tag">
+              <span class="material-symbols-rounded">label</span> Category Tag
+            </label>
+            <select id="contact-tag">
+              <option value="Personal">Personal</option>
+              <option value="Work">Work</option>
+              <option value="Family">Family</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="contact-favorite">
+              <span class="custom-checkbox"></span>
+              <span class="label-text">
+                <span class="material-symbols-rounded text-favorite">star</span> Mark as Favorite
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" id="btn-cancel-modal">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btn-save-contact">Save Contact</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal-overlay" id="delete-modal">
+    <div class="modal-card modal-confirm">
+      <div class="modal-header">
+        <h2>Delete Contact</h2>
+        <button class="close-btn" id="btn-close-delete">
+          <span class="material-symbols-rounded">close</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete <strong id="delete-contact-name"></strong>?</p>
+        <p class="text-warning">This action cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" id="btn-cancel-delete">Cancel</button>
+        <button type="button" class="btn btn-danger" id="btn-confirm-delete">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Core JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>
